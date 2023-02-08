@@ -32,8 +32,8 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    freopen("input.txt","r",stdin);
-    freopen("output.txt","w",stdout);
+    freopen("input/day1.txt","r",stdin);
+    freopen("output/day1-2.txt","w",stdout);
     string s;
     long long res=0,cur=0;
     vector<ll> a;

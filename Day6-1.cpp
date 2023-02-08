@@ -54,8 +54,8 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    freopen("input.txt","r",stdin);
-    freopen("output.txt","w",stdout);
+    freopen("input/day6.txt","r",stdin);
+    freopen("output/day6-1.txt","w",stdout);
     string s;
     cin>>s;
     for(int i=0;i<s.size();i++){

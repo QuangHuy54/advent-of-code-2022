@@ -103,8 +103,8 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    freopen("input.txt","r",stdin);
-    freopen("output.txt","w",stdout);
+    freopen("input/day9.txt","r",stdin);
+    freopen("output/day9-1.txt","w",stdout);
     pii H(0,0);
     pii T(0,0);
     visited.insert({0,0});
