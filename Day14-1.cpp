@@ -54,39 +54,28 @@ ll toInt(string s) {
 }
 //Brute force solution
 
-int n, m; //size of matrix
-int move(vector<vector<int>> matrix, int& x, int& y) { //move a unit of sand
-    //0: successfully moved, 1: stop, 2: falling forever
-    if (x < n - 1) {
-        //check go down
-        if (matrix[x + 1][y] == 0) { //can move down
-            x++;
-            return 0;
+int n, m,res=0; //size of matrix
+int dy[3]={0,-1,1};
+int fall(int x,int y,vector<vector<int>>& map){
+    //return 1: fall forever, 0: stop, 2: can mark   
+    //cout<<x<<" "<<y<<endl;
+        map[x][y]=2;
+        int res1=0;
+        for(int i=0;i<3;i++){
+            if(x+1>=n||y+dy[i]<0||y+dy[i]>=m){
+                return 1;
+            }
+            else if(map[x+1][y+dy[i]]==0){
+                res1=max(res1,fall(x+1,y+dy[i],map));
+                if(res1==1){
+                    return res1;
+                }
+            }
         }
-        //check go down and left
-        if (y == 0) {
-            return 2; //go down and left cause falling forever
+        if(res1==0){ //can mark
+            res++;
         }
-        else if (matrix[x + 1][y - 1] == 0) { //can go down and left
-            x++;
-            y--;
-            return 0;
-        }
-        //check go down and right
-        if (y == m - 1) {
-            return 2; //go down and right cause falling forever
-        }
-        else if (matrix[x + 1][y + 1] == 0) { //can go down and right
-            x++;
-            y++;
-            return 0;
-        }
-        //no movement
-        return 1;
-    }
-    else {
-        return 2; //go down cause falling forever
-    }
+        return res1;
 }
 int main()
 {
@@ -137,24 +126,7 @@ int main()
     for (pii rock : rocks) {
         matrix[rock.first][rock.second - min_y] = 1;
     }
-    int res = 0;
-    bool falling_forever = false;
-    while (!falling_forever) {
-        int cur_x = 0, cur_y = 500 - min_y;
-        while (true) {
-            int status = move(matrix, cur_x, cur_y);
-            if (status == 1) {
-                matrix[cur_x][cur_y] = 2;
-                cur_x = 0;
-                cur_y = 500 - min_y;
-                res++;
-            }
-            else if (status == 2) {
-                falling_forever = true;
-                break;
-            }
-        }
-    }
+    fall(0,500-min_y,matrix);
     cout << res << "\n";
     return 0;
 }
